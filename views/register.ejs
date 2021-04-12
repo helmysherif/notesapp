@@ -1,0 +1,47 @@
+<%- include('shared/header.ejs')  %> 
+    <div class="container my-5 py-5">
+        <div class="col-md-5 m-auto text-center">
+            <% if (exists.length != 0){ %>
+                <div class="alert alert-danger text-center my-3">
+                    <h5 class = "p-0 m-0">Email Already Exists! </h5>
+                </div>
+            <% } %>
+            <form action="/handleSignUp" method="POST">
+                <div class="form-group">
+                    <input value = "<%= oldInputs.length == 0 ? "" : oldInputs[0].name %>" placeholder="Enter your name" name="name" type="text" class = "form-control" />
+                    <% if (errors.find(e => e.param == 'name')) { %>
+                        <div class="alert alert-danger mt-2">
+                            Invalid Input
+                        </div>
+                    <% } %>
+                </div>
+                <div class="form-group">
+                    <input value = "<%= oldInputs.length == 0 ? "" : oldInputs[0].email %>" placeholder="Enter email" type="email" name="email" class="form-control" />
+                    <% if (errors.find(e => e.param == 'email')) { %>
+                        <div class="alert alert-danger mt-2">
+                            Invalid Input
+                        </div>
+                    <% } %>
+                </div>
+                <div class="form-group">
+                    <input value = "<%= oldInputs.length == 0 ? "" : oldInputs[0].password %>" placeholder="Enter you password" type="password" name="password" class="form-control" />
+                    <% if (errors.find(e => e.param == 'password')) { %>
+                        <div class="alert alert-danger mt-2">
+                            Invalid Input
+                        </div>
+                    <% } %>
+                </div>
+                <div class="form-group">
+                    <input placeholder="confirm Password" type="password" name="confirmPassword" class="form-control" />
+                    <% if (errors.find(e => e.param == 'confirmPassword')) { %>
+                        <div class="alert alert-danger mt-2">
+                            Password And Confirmed Password Are Not Matched
+                        </div>
+                    <% } %>
+                </div>
+                <button type="submit" class="btn btn-info w-100">SignUp</button>
+            </form>
+        </div>
+    </div>
+
+    <%- include('shared/footer.ejs')  %> 
